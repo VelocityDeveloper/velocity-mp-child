@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+:root {
+    --bs-body-font-size: .85rem !important;
+    --bs-body-font-family: 'Roboto', sans-serif !important;
+}
+body, .is-root-container, .primary-font {
+    font-family: var(--bs-body-font-family) !important;
+}
+.container {
+    max-width: 900px !important;
+}
+.navbar-nav a {
+	font-size: 16px !important;
+	padding-left: 15px !important;
+	padding-right: 15px !important;
+}
+.navbar-brand img {
+    max-height: 90px !important;
+}
+.dropdown-item.active, .dropdown-item:active {
+    background-color: var(--color-theme) !important;
+}
+
+.widget .widget-title {
+    font-size: 22px;
+    color: #373736;
+    line-height: 26px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+#left-sidebar .widget,
+#right-sidebar .widget {
+    background-color: #F5F5F5;
+    padding: 20px;
+}
+.home-main-sidebar .widget:last-child {
+    margin-bottom: 0 !important;
+}
+.footer-widget .widget .widget-title {
+    text-align: left;
+    font-size: 17px;
+    margin-bottom: 10px !important;
+}
+.widget ul.list-group {
+    padding-left: 0 !important;
+}
+.vmpc-footer-image {
+    width: 100%;
+    height: 160px;
+    background-image: url('../img/footer.png');
+    background-repeat: repeat-x;
+    background-size: auto 140px;
+    background-position: center bottom;
+}
+
+.vmpc-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+  html, body {
+      overflow-x: hidden;
+  }
+  .offcanvas-body .dropdown-toggle::after {
+    top: 17px;
+   }
+}
+
+
+
