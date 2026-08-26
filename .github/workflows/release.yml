@@ -1,0 +1,39 @@
+name: Release theme
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build release package
+        shell: bash
+        run: |
+          set -euo pipefail
+          slug="velocity-mp-child"
+          version="$(sed -n 's/^[[:space:]]*Version:[[:space:]]*//p' style.css | head -n 1 | tr -d '\r')"
+          tag_version="${GITHUB_REF_NAME#v}"
+
+          if [[ -z "$version" || "$version" != "$tag_version" ]]; then
+            echo "Tag version ($tag_version) must match style.css version ($version)." >&2
+            exit 1
+          fi
+
+          mkdir -p "release/$slug"
+          rsync -a --exclude='.git' --exclude='.github' --exclude='release' ./ "release/$slug/"
+          cd release
+          zip -qr "../${slug}-${version}.zip" "$slug"
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" "velocity-mp-child-${GITHUB_REF_NAME#v}.zip" --generate-notes --verify-tag
